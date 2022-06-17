@@ -1,6 +1,6 @@
 {
   "name": "node-public-data-tour-api",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
@@ -12,7 +12,19 @@
   },
   "license": "MIT",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "대한민국 관광지",
+    "영어",
+    "일본어",
+    "중국어",
+    "독일어",
+    "프랑스어",
+    "스페인어",
+    "러시아어",
+    "관광지 API",
+    "node.js",
+    "대한민국 여행정보"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/dryadsoft/node-public-data-tour-api.git"
