@@ -39,7 +39,7 @@ try {
       numOfRows: 50,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
     });
   console.log(totalCount);
@@ -61,7 +61,7 @@ try {
       numOfRows: 50,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentTypeId: 76, // 없으면 대분류 전체
       cat1: "A01", // 특정 대분류만 조회   cat2: 중분류, cat3: 소분류
@@ -85,7 +85,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentTypeId: 77,
     });
@@ -108,7 +108,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       mapX: 126.981611,
       mapY: 37.568477,
@@ -133,7 +133,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       keyword: "seoul",
     });
@@ -156,7 +156,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       eventStartDate: 20180110,
     });
@@ -179,7 +179,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
     });
   console.log(totalCount);
@@ -201,7 +201,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentId: 1891502,
     });
@@ -240,7 +240,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentId: 1128279,
       contentTypeId: 77,
@@ -269,7 +269,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentId: 1752884,
       contentTypeId: 76,
@@ -293,7 +293,7 @@ try {
       numOfRows: 5,
       pageNo: 1,
       MobileOS: "ETC",
-      MobileApp: "dryadtourinfoserver",
+      MobileApp: "apptest",
       ServiceKey: SERVICE_KEY,
       contentId: 2507421,
       imageYN: "Y",
