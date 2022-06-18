@@ -1,5 +1,22 @@
 # 공공데이터포털 다국어관광정보 API
 
+[![npm version](https://img.shields.io/npm/v/node-public-data-tour-api.svg?style=flat-square)](https://www.npmjs.org/package/node-public-data-tour-api)
+[![npm downloads](https://img.shields.io/npm/dm/node-public-data-tour-api.svg?style=flat-square)](http://npm-stat.com/charts.html?package=node-public-data-tour-api)
+
+## 설치(Installing)
+
+npm 사용:
+
+```bash
+$ npm i node-public-data-tour-api
+```
+
+yarn 사용:
+
+```bash
+$ yarn add nnode-public-data-tour-api
+```
+
 ## API 제공 언어
 
 - 영문 EngService
@@ -24,6 +41,8 @@
 - detailIntro 소개정보 조회 (상세정보2)
 - detailInfo 반복정보 조회 (상세정보3)
 - detailImage 이미지정보 조회 (상세정보4)
+
+## 예제
 
 ```typescript
 const SERVICE_KEY = "공공데이터포탈 service key";
@@ -306,3 +325,11 @@ try {
   console.log(err);
 }
 ```
+
+## Resources
+
+- [CHANGELOG](https://github.com/dryadsoft/nnode-public-data-tour-api/blob/master/CHANGELOG.md)
+
+## License
+
+[MIT](LICENSE)
