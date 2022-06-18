@@ -1,6 +1,6 @@
 {
   "name": "node-public-data-tour-api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "lib/index.js",
   "files": [
     "lib/**/*"
@@ -11,7 +11,7 @@
     "url": "https://github.com/dryadsoft/node-public-data-tour-api.git"
   },
   "license": "MIT",
-  "description": "",
+  "description": "공공데이터 포탈의 다국어 관광정보 API 사용하기",
   "keywords": [
     "대한민국 관광지",
     "영어",
