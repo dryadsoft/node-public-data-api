@@ -26,7 +26,7 @@ export const detailCommon = async ({
   overviewYN,
   transGuideYN,
   timeout = 3000,
-}: IDetailCommon): Promise<ICommonResult<IDetailCommonItem[]>> => {
+}: IDetailCommon): Promise<ICommonResult<IDetailCommonItem>> => {
   try {
     const url = `${BASE_URL}/${language}Service/detailCommon` as const;
     const source = axios.CancelToken.source();
@@ -43,7 +43,7 @@ export const detailCommon = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailCommonItem[]>>(url, {
+    } = await axios.get<ICommonRes<IDetailCommonItem>>(url, {
       params: {
         numOfRows,
         pageNo,
