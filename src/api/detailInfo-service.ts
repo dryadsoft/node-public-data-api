@@ -21,7 +21,7 @@ export const detailInfo = async ({
   contentId,
   contentTypeId,
   timeout = 3000,
-}: IDetailInfo): Promise<ICommonResult<IDetailInfoItem>> => {
+}: IDetailInfo): Promise<ICommonResult<IDetailInfoItem[]>> => {
   try {
     const url = `${BASE_URL}/${language}Service/detailInfo` as const;
     const source = axios.CancelToken.source();
@@ -38,7 +38,7 @@ export const detailInfo = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailInfoItem>>(url, {
+    } = await axios.get<ICommonRes<IDetailInfoItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -56,7 +56,9 @@ export const detailInfo = async ({
       return {
         resultCode,
         resultMsg,
-        items,
+        items: !Array.isArray(items.item)
+          ? { item: [items.item] }
+          : { item: items.item },
         numOfRows: _numOfRows,
         pageNo: _pageNo,
         totalCount,
