@@ -154,7 +154,7 @@ const SERVICE_KEY = `${process.env.SERVICE_KEY}`;
         contentId: 2507421,
         imageYN: "Y",
       });
-    console.log(totalCount);
+    console.log(totalCount, resultCode, resultMsg);
     if (resultCode === "0000") {
       console.log(items);
     }

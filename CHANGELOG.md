@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## node-public-data-tour-api
+
+### 0.3.0 (2023-06-30)
+
+수정 및 기능추가:
+
+- 수정: BASE_URL 변경 (http://apis.data.go.kr/B55101), axios request timeout 개선
+
 ### 0.2.0 (2022-08-05)
 
 수정 및 기능추가:

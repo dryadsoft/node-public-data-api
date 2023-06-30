@@ -2,7 +2,8 @@ import axios from "axios";
 import "dotenv/config";
 import IAreaCode, { IAreaCodeItem } from "./areaCode-interface";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
+import customAxios from "../utils/customAxios";
 
 /**
  * 지역코드 조회
@@ -20,12 +21,7 @@ export const areaCode = async ({
   timeout = 3000,
 }: IAreaCode): Promise<ICommonResult<IAreaCodeItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/areaCode` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "areaCode1" });
     const {
       data: {
         response: {
@@ -35,7 +31,7 @@ export const areaCode = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IAreaCodeItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<IAreaCodeItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -45,7 +41,6 @@ export const areaCode = async ({
         areaCode,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

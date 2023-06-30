@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import IDetailCommon, { IDetailCommonItem } from "./detailCommon-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 공통정보 조회
@@ -28,12 +29,7 @@ export const detailCommon = async ({
   timeout = 3000,
 }: IDetailCommon): Promise<ICommonResult<IDetailCommonItem>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/detailCommon` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "detailCommon1" });
     const {
       data: {
         response: {
@@ -43,7 +39,7 @@ export const detailCommon = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailCommonItem>>(url, {
+    } = await customAxios.get<ICommonRes<IDetailCommonItem>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -62,7 +58,6 @@ export const detailCommon = async ({
         transGuideYN,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

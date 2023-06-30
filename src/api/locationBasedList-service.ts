@@ -1,9 +1,10 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import ILocationBasedList, {
   ILocationBasedListItem,
 } from "./locationBased-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 위치기반 관광정보 조회
@@ -26,12 +27,7 @@ export const locationBasedList = async ({
   timeout = 3000,
 }: ILocationBasedList): Promise<ICommonResult<ILocationBasedListItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/locationBasedList` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "locationBasedList1" });
     const {
       data: {
         response: {
@@ -41,7 +37,7 @@ export const locationBasedList = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<ILocationBasedListItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<ILocationBasedListItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -57,7 +53,6 @@ export const locationBasedList = async ({
         modifiedtime,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

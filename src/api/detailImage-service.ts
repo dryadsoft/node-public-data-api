@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import IDetailImage, { IDetailImageItem } from "./detailImage-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 이미지정보 조회
@@ -22,12 +23,7 @@ export const detailImage = async ({
   timeout = 3000,
 }: IDetailImage): Promise<ICommonResult<IDetailImageItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/detailImage` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "detailImage1" });
     const {
       data: {
         response: {
@@ -37,7 +33,7 @@ export const detailImage = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailImageItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<IDetailImageItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -49,7 +45,6 @@ export const detailImage = async ({
         subImageYN,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

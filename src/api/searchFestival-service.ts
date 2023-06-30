@@ -1,9 +1,10 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import ISearchFestival, {
   ISearchFestivalItem,
 } from "./searchFestival-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 행사정보 조회
@@ -26,12 +27,7 @@ export const searchFestival = async ({
   timeout = 3000,
 }: ISearchFestival): Promise<ICommonResult<ISearchFestivalItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/searchFestival` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "searchFestival1" });
     const {
       data: {
         response: {
@@ -41,7 +37,7 @@ export const searchFestival = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<ISearchFestivalItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<ISearchFestivalItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -57,7 +53,6 @@ export const searchFestival = async ({
         modifiedtime,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

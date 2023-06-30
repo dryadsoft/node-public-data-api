@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import ISearchKeyword, { ISearchKeywordItem } from "./searchKeyword-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 키워드검색 조회
@@ -26,12 +27,7 @@ export const searchKeyword = async ({
   timeout = 3000,
 }: ISearchKeyword): Promise<ICommonResult<ISearchKeywordItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/searchKeyword` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "searchKeyword1" });
     const {
       data: {
         response: {
@@ -41,7 +37,7 @@ export const searchKeyword = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<ISearchKeywordItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<ISearchKeywordItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -59,7 +55,6 @@ export const searchKeyword = async ({
         keyword,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

@@ -2,7 +2,8 @@ import axios from "axios";
 import "dotenv/config";
 import ICategoryCode, { ICategoryCodeItems } from "./categoryCode-interface";
 import { ICommonRes, ICommonResult } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
+import customAxios from "../utils/customAxios";
 
 /**
  * 서비스 분류코드 조회
@@ -23,12 +24,7 @@ export const categoryCode = async ({
   timeout = 3000,
 }: ICategoryCode): Promise<ICommonResult<ICategoryCodeItems[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/categoryCode` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "categoryCode1" });
     const {
       data: {
         response: {
@@ -38,7 +34,7 @@ export const categoryCode = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<ICategoryCodeItems[]>>(url, {
+    } = await customAxios.get<ICommonRes<ICategoryCodeItems[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -51,7 +47,6 @@ export const categoryCode = async ({
         cat3,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
 

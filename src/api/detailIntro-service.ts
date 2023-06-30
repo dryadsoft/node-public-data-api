@@ -1,10 +1,11 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import IDetailIntro, {
   IDetailIntroItem,
   IDetailIntros,
 } from "./detailIntro-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 소개정보 조회
@@ -25,12 +26,7 @@ export const detailIntro = async <T extends IDetailIntros>({
   timeout = 3000,
 }: IDetailIntro): Promise<ICommonResult<IDetailIntroItem & T>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/detailIntro` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "detailIntro1" });
     const {
       data: {
         response: {
@@ -40,7 +36,7 @@ export const detailIntro = async <T extends IDetailIntros>({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailIntroItem & T>>(url, {
+    } = await customAxios.get<ICommonRes<IDetailIntroItem & T>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -51,7 +47,6 @@ export const detailIntro = async <T extends IDetailIntros>({
         contentTypeId,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

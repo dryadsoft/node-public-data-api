@@ -1,7 +1,8 @@
 import axios from "axios";
 import IAreaBasedList, { IAreaBasedListItem } from "./areaBasedList-interface";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
+import customAxios from "../utils/customAxios";
 
 /**
  * 지역기반 관광정보 조회
@@ -26,12 +27,7 @@ export const areaBasedList = async ({
   timeout = 3000,
 }: IAreaBasedList): Promise<ICommonResult<IAreaBasedListItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/areaBasedList` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "areaBasedList1" });
     const {
       data: {
         response: {
@@ -41,7 +37,7 @@ export const areaBasedList = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IAreaBasedListItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<IAreaBasedListItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -59,7 +55,6 @@ export const areaBasedList = async ({
         modifiedtime,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

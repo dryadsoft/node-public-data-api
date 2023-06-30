@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import IDetailInfo, { IDetailInfoItem } from "./detailInfo-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 반복정보 조회
@@ -23,12 +24,7 @@ export const detailInfo = async ({
   timeout = 3000,
 }: IDetailInfo): Promise<ICommonResult<IDetailInfoItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/detailInfo` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "detailInfo1" });
     const {
       data: {
         response: {
@@ -38,7 +34,7 @@ export const detailInfo = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<IDetailInfoItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<IDetailInfoItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -49,7 +45,6 @@ export const detailInfo = async ({
         contentTypeId,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {

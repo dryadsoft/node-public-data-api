@@ -1,7 +1,8 @@
 import axios from "axios";
 import { ICommonResult, ICommonRes } from "./common-interface";
-import { BASE_URL } from "./constants";
+import { getServiceUrl } from "../utils/constants";
 import ISearchStay, { ISearchStayItem } from "./searchStay-interface";
+import customAxios from "../utils/customAxios";
 
 /**
  * 숙박정보 조회
@@ -25,12 +26,7 @@ export const searchStay = async ({
   timeout = 3000,
 }: ISearchStay): Promise<ICommonResult<ISearchStayItem[]>> => {
   try {
-    const url = `${BASE_URL}/${language}Service/searchStay` as const;
-    const source = axios.CancelToken.source();
-    setTimeout(() => {
-      source.cancel(`request ${timeout} ms timeout error`);
-    }, timeout);
-
+    const url = getServiceUrl({ language, service: "searchStay1" });
     const {
       data: {
         response: {
@@ -40,7 +36,7 @@ export const searchStay = async ({
       },
       status,
       statusText,
-    } = await axios.get<ICommonRes<ISearchStayItem[]>>(url, {
+    } = await customAxios.get<ICommonRes<ISearchStayItem[]>>(url, {
       params: {
         numOfRows,
         pageNo,
@@ -57,7 +53,6 @@ export const searchStay = async ({
         modifiedtime,
         _type: "json",
       },
-      cancelToken: source.token,
       timeout,
     });
     if (status === 200) {
